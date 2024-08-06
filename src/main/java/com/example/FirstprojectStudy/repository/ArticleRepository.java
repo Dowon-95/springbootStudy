@@ -1,7 +1,7 @@
 package com.example.FirstprojectStudy.repository;
 
 
-import com.example.FirstprojectStudy.controller.entity.Article;
+import com.example.FirstprojectStudy.entity.Article;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

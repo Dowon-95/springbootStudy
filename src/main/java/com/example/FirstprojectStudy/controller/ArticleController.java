@@ -1,6 +1,6 @@
 package com.example.FirstprojectStudy.controller;
 
-import com.example.FirstprojectStudy.controller.entity.Article;
+import com.example.FirstprojectStudy.entity.Article;
 import com.example.FirstprojectStudy.dto.ArticleForm;
 import com.example.FirstprojectStudy.repository.ArticleRepository;
 import lombok.extern.slf4j.Slf4j;
