@@ -27,7 +27,7 @@ public class ArticleApiController {
         return articleService.show(id);
     }
 
-    @PostMapping("api/articles")
+    @PostMapping("/api/articles")
     public ResponseEntity<Article> create(@RequestBody ArticleForm dto) {
         Article crated = articleService.create(dto);
 
@@ -36,23 +36,31 @@ public class ArticleApiController {
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }
 
-    @PatchMapping("api/articles/{id}")
+    @PatchMapping("/api/articles/{id}")
     public ResponseEntity<Article> update(@PathVariable Long id, @RequestBody ArticleForm dto) {
-        Article updated = articleService.update(id,dto);
+        Article updated = articleService.update(id, dto);
 
         return (updated != null) ?
                 ResponseEntity.status(HttpStatus.OK).body(updated) :
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }
 
-    @DeleteMapping("api/articles/{id}")
+    @DeleteMapping("/api/articles/{id}")
     public ResponseEntity<Article> delete(@PathVariable Long id) {
         Article deleted = articleService.delete(id);
 
         return (deleted != null) ?
                 ResponseEntity.status(HttpStatus.OK).build() :
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+    }
 
+    @PostMapping("/api/transaction-test")
+    public ResponseEntity<Article> transactionTest(@RequestBody List<ArticleForm> dtos) {
+        List<Article> createdList = articleService.createArticles(dtos);
+
+        return (createdList != null) ?
+                ResponseEntity.status(HttpStatus.OK).build() :
+                ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 
     }
 /*

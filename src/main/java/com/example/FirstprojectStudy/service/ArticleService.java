@@ -6,9 +6,12 @@ import com.example.FirstprojectStudy.repository.ArticleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+@Transactional
 @Slf4j
 @Service
 public class ArticleService {
@@ -57,4 +60,20 @@ public class ArticleService {
         articleRepository.delete(target);
         return target;
     }
+
+
+    public List<Article> createArticles(List<ArticleForm> dtos){
+        List<Article> articleList = dtos.stream()
+                .map(ArticleForm::toEntity)
+                .collect(Collectors.toList());
+        articleList.stream().forEach(
+                article -> articleRepository.save(article)
+        );
+
+        articleRepository.findById(-1L)
+                .orElseThrow(() -> new IllegalArgumentException("조회 실패"));
+
+        return articleList;
+    }
+
 }
